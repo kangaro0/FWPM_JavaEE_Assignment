@@ -31,7 +31,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNav">
 					<ul class="navbar-nav">
-						<li class="nav-item active">
+						<li class="nav-item">
 							<a class="nav-link" href="/FWPM_JavaEE_Assignment/">Home
 								<span class="sr-only">(current)</span>
 							</a>
@@ -55,10 +55,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</nav>
 
-			<!-- Big Image -->
-			<div class='container-fluid big-image'>
-				<div class='container big-image-text'>
-					<h1>Your shop for mobile phones!</h1>
+			<!-- Login -->
+			<div class='container-fluid'>
+				<div class='row'>
+					<div class='col'></div>
+					<div class='col'>
+						<div class='login-form'>
+							<form method='POST' action='/FWPM_JavaEE_Assignment/Login'>
+								Username:<br />
+								<input type='text' name='username'>
+								<br />
+								Password:<br />
+								<input type='password' name='password'>
+								<br />
+								<input type='submit' value='Login'>
+							</form>
+						</div>
+					</div>
+					<div class='col'></div>
 				</div>
 			</div>
 
