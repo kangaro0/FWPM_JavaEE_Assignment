@@ -5,34 +5,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import models.Manufacturer;
+import models.Image;
 
 
-public class ManufacturerDAO implements DAOInterface<Manufacturer>{
-	
+public class ImageDAO implements DAOInterface<Image> {
 	
 	DBConnection _dbConnection;
-	ArrayList<Manufacturer> _manufacturers;
+	ArrayList<Image> _images;
 	
-	public ManufacturerDAO() {
+	public ImageDAO() {
 		_dbConnection = new DBConnection();
 	}
-	
-	public ArrayList<Manufacturer> GetAll(){
-		
+
+	@Override
+	public ArrayList<Image> GetAll() {
 		connect();
 		
-		ArrayList<Manufacturer> manufacturers = new ArrayList<Manufacturer>();
+		ArrayList<Image> images = new ArrayList<Image>();
 		
 		try {
 		
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Category" );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Image" );
 			ResultSet result = stmt.executeQuery();
 			
 			while( result.next() ){
-				Manufacturer current = new Manufacturer(result.getInt(1), result.getString(2));
-				_manufacturers.add( current );
+				Image current = new Image(result.getInt(1), result.getBlob(2));
+				images.add( current );
 			}
+			
+			result.close();
+			stmt.close();
 			
 		} catch( SQLException sqle ){
 			sqle.printStackTrace();
@@ -40,67 +42,26 @@ public class ManufacturerDAO implements DAOInterface<Manufacturer>{
 		
 		disconnect();
 		
-		return manufacturers;
+		return images;
 	}
-	
-	public Manufacturer GetById( int id ){
-		for( Manufacturer i : _manufacturers ){
+
+	@Override
+	public Image GetById(int id) {
+		for( Image i : _images ){
 			if( i.getId() == id )
 				return i;
 		}
 		return null;
 	}
-	
-	@Override
-	public void Create(Manufacturer model) {
-		connect();
-		
-		try {
-			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Manufacturer(title) VALUES(?)" );
-			stmt.setString( 1, model.getTitle() );
-			
-			stmt.execute();
-			stmt.close();
-			
-		} catch( SQLException sqle ){
-			sqle.printStackTrace();
-		}
-		
-		initialize();
-		disconnect();
-		
-	}
 
 	@Override
-	public void Delete(Manufacturer model) {
+	public void Update(Image model) {
 		connect();
 		
 		try {
 			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "DELETE FROM Manufacturer WHERE id=?" );
-			stmt.setInt( 1, model.getId() );
-			
-			stmt.execute();
-			stmt.close();
-			
-		} catch( SQLException sqle ){
-			sqle.printStackTrace();
-		}
-		
-		initialize();
-		disconnect();
-		
-	}
-
-	@Override
-	public void Update(Manufacturer model) {
-		connect();
-		
-		try {
-			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE Manufacturer SET title='?' WHERE id=?" );
-			stmt.setString( 1, model.getTitle() );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE Image SET dat='?' WHERE id=?" );
+			stmt.setBlob( 1, model.getData() );
 			stmt.setInt(2, model.getId());
 			
 			stmt.execute();
@@ -113,7 +74,49 @@ public class ManufacturerDAO implements DAOInterface<Manufacturer>{
 		disconnect();
 		
 	}
-	
+
+	@Override
+	public void Create(Image model) {
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO image(dat) VALUES(?)" );
+			stmt.setBlob(1, model.getData());
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		initialize();
+		disconnect();
+		
+	}
+
+	@Override
+	public void Delete(Image model) {
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "DELETE FROM Image WHERE id=?" );
+			stmt.setInt( 1, model.getId() );
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		initialize();
+		disconnect();
+
+		
+	}
 	
 	private void connect(){
 		if( _dbConnection.IsConnected() )
@@ -128,12 +131,7 @@ public class ManufacturerDAO implements DAOInterface<Manufacturer>{
 	}
 	
 	private void initialize(){
-		_manufacturers = GetAll();
+		_images = GetAll();
 	}
-	
-	
-
-
-
 
 }

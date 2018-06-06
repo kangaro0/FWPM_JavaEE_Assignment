@@ -1,12 +1,14 @@
 package models;
 
+import java.sql.Blob;
+
 public class Image {
 	private int _id;
-	private byte[] _data;
+	private Blob _data;
 	
-	public Image( int id, byte[] data ){
+	public Image( int id, Blob blob ){
 		_id = id;
-		_data = data;
+		_data = blob;
 	}
 
 	public int getId() {
@@ -17,11 +19,11 @@ public class Image {
 		this._id = _id;
 	}
 
-	public byte[] getData() {
+	public Blob getData() {
 		return _data;
 	}
 
-	public void setData(byte[] _data) {
+	public void setData(Blob _data) {
 		this._data = _data;
 	}
 }
