@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Category;
 
-public class CategoryDAO {
+public class CategoryDAO implements DAOInterface<Category>{
 	
 	DBConnection _dbConnection;
 	ArrayList<Category> _categories;
@@ -15,27 +15,27 @@ public class CategoryDAO {
 		_dbConnection = new DBConnection();
 	}
 	
-public ArrayList<Category> GetAll(){
+	public ArrayList<Category> GetAll(){
 		
-		connect();
+	connect();
 		
-		ArrayList<Category> categories = new ArrayList<Category>();
+	ArrayList<Category> categories = new ArrayList<Category>();
 		
-		try {
+	try {
 		
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Category" );
-			ResultSet result = stmt.executeQuery();
+		PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Category" );
+		ResultSet result = stmt.executeQuery();
 			
-			while( result.next() ){
-				Category current = new Category(result.getInt(1), result.getString(2));
-				_categories.add( current );
-			}
-			
-		} catch( SQLException sqle ){
-			sqle.printStackTrace();
+		while( result.next() ){
+			Category current = new Category(result.getInt(1), result.getString(2));
+			_categories.add( current );
 		}
+			
+	} catch( SQLException sqle ){
+			sqle.printStackTrace();
+	}
 		
-		disconnect();
+	disconnect();
 		
 		return categories;
 	}
@@ -48,14 +48,15 @@ public ArrayList<Category> GetAll(){
 		return null;
 	}
 	
-	public void UpdateCategory( Category category ){
+	@Override
+	public void Update(Category model) {
 		connect();
 		
 		try {
 			
 			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE Category SET title='?' WHERE id=?" );
-			stmt.setString( 1, category.getTitle() );
-			stmt.setInt(2, category.getId());
+			stmt.setString( 1, model.getTitle() );
+			stmt.setInt(2, model.getId());
 			
 			stmt.execute();
 			stmt.close();
@@ -65,8 +66,21 @@ public ArrayList<Category> GetAll(){
 		}
 		
 		disconnect();
+		
 	}
-	
+
+	@Override
+	public void Create(Category model) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void Delete(Category model) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 	private void connect(){
 		if( _dbConnection.IsConnected() )
@@ -83,5 +97,6 @@ public ArrayList<Category> GetAll(){
 	private void initialize(){
 		_categories = GetAll();
 	}
+
 
 }

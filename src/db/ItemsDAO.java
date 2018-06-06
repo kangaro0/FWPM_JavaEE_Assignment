@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Item;
 
-public class ItemsDAO {
+public class ItemsDAO implements DAOInterface<Item> {
 	
 	DBConnection _dbConnection;
 	ArrayList<Item> _items;
