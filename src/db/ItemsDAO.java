@@ -77,19 +77,19 @@ public class ItemsDAO implements DAOInterface<Item> {
 		return items;
 	}
 	
-	public void Create( Item item ){
+	public void Create( Item model ){
 		
 		connect();
 		
 		try {
 			
 			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Item(title, manufacturer, prize, image, description, category) VALUES(?,?,?,?,?,?)" );
-			stmt.setString( 1, item.getTitle() );
-			stmt.setInt( 2, item.getManufacturerId() );
-			stmt.setFloat( 3, item.getPrize() );
-			stmt.setInt( 4, item.getImageId() );
-			stmt.setInt( 5, item.getDescriptionId() );
-			stmt.setInt( 6, item.getCategoryId() );
+			stmt.setString( 1, model.getTitle() );
+			stmt.setInt( 2, model.getManufacturerId() );
+			stmt.setFloat( 3, model.getPrize() );
+			stmt.setInt( 4, model.getImageId() );
+			stmt.setInt( 5, model.getDescriptionId() );
+			stmt.setInt( 6, model.getCategoryId() );
 			
 			stmt.execute();
 			stmt.close();
@@ -102,21 +102,21 @@ public class ItemsDAO implements DAOInterface<Item> {
 		disconnect();
 	}
 	
-	public void Update( Item item ){
+	public void Update( Item model ){
 		
 		connect();
 		
 		try {
 			
 			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE Item SET title='?', manufacturer=?, prize=?, image=?, description=?, category=? WHERE id=?" );
-			stmt.setString( 1, item.getTitle() );
-			stmt.setInt( 1, item.getManufacturerId() );
-			stmt.setFloat( 2, item.getPrize() );
-			stmt.setInt( 3, item.getImageId() );
-			stmt.setInt( 4, item.getImageId() );
-			stmt.setInt( 5, item.getDescriptionId() );
-			stmt.setInt( 6, item.getCategoryId() );
-			stmt.setInt( 7, item.getId() );
+			stmt.setString( 1, model.getTitle() );
+			stmt.setInt( 1, model.getManufacturerId() );
+			stmt.setFloat( 2, model.getPrize() );
+			stmt.setInt( 3, model.getImageId() );
+			stmt.setInt( 4, model.getImageId() );
+			stmt.setInt( 5, model.getDescriptionId() );
+			stmt.setInt( 6, model.getCategoryId() );
+			stmt.setInt( 7, model.getId() );
 			
 			stmt.execute();
 			stmt.close();
@@ -129,14 +129,14 @@ public class ItemsDAO implements DAOInterface<Item> {
 		disconnect();
 	}
 	
-	public void Delete( Item item ){
+	public void Delete( Item model ){
 		
 		connect();
 		
 		try {
 			
 			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "DELETE FROM Item WHERE id=?" );
-			stmt.setInt( 1, item.getId() );
+			stmt.setInt( 1, model.getId() );
 			
 			stmt.execute();
 			stmt.close();
