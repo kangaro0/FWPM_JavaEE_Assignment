@@ -1,41 +1,136 @@
 package db;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import models.User;
 
-public class UserDAO implements DAOInterface<User> {
+public class UserDAO extends BasicDAO implements DAOInterface<User> {
 
-	private DBConnection _dbConnection;
 	private ArrayList<User> _users;
+	
+	public UserDAO(){
+		initialize();
+	}
 	
 	@Override
 	public ArrayList<User> GetAll() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<User> users = new ArrayList<User>();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Usr" );
+			ResultSet result = stmt.executeQuery();
+			
+			while( result.next() ){
+				User current = new User( result.getInt( 1 ), result.getString( 2 ), result.getString( 3 ), result.getString( 4 ), result.getString( 5 ), result.getString( 6 ), result.getInt( 7 ) );
+				users.add( current );
+			}
+			
+			result.close();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		return users;
 	}
 
 	@Override
-	public User GetById(int id) {
-		// TODO Auto-generated method stub
+	public User GetById( int id ) {
+		for( User u : _users ){
+			if( u.getId() == id )
+				return u;
+		}
+		return null;
+	}
+	
+	public User GetByUserName( String userName ){
+		for( User u : _users ){
+			if( u.getUserName() == userName )
+				return u;
+		}
 		return null;
 	}
 	
 	@Override
-	public void Create(User model) {
-		// TODO Auto-generated method stub
+	public void Create( User model ) {
+		
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Usr(username,firstname,lastname,address,city,postcode) VALUES(?,?,?,?,?,?)" );
+			stmt.setString( 1, model.getUserName() );
+			stmt.setString( 2, model.getFirstName() );
+			stmt.setString( 3, model.getLastName() );
+			stmt.setString( 4, model.getAddress() );
+			stmt.setString( 5,  model.getCity() );
+			stmt.setInt( 6, model.getPostCode() );
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		initialize();
+		disconnect();
+	}
+
+	@Override
+	public void Update( User model ) {
+		
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE Usr SET username='?', firstname='?', lastname='?', address='?', city='?', postCode=? WHERE id=?" );
+			stmt.setString( 1, model.getUserName() );
+			stmt.setString( 2, model.getFirstName() );
+			stmt.setString( 3, model.getLastName() );
+			stmt.setString( 4, model.getAddress() );
+			stmt.setString( 5,  model.getCity() );
+			stmt.setInt( 6, model.getPostCode() );
+			stmt.setInt( 7, model.getId() );
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		initialize();
+		disconnect();
 		
 	}
 
 	@Override
-	public void Update(User model) {
-		// TODO Auto-generated method stub
+	public void Delete( User model ) {
 		
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "DELETE FROM Usr WHERE id=?" );
+			stmt.setInt( 1, model.getId() );
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		initialize();
+		disconnect();
 	}
 
-	@Override
-	public void Delete(User model) {
-		// TODO Auto-generated method stub
-		
+	private void initialize(){
+		_users = GetAll();
 	}
-
 }

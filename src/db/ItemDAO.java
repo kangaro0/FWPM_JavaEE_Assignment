@@ -17,7 +17,6 @@ public class ItemDAO extends BasicDAO implements DAOInterface<Item> {
 	/*
 	 *  CRUD
 	 */
-	
 	public ArrayList<Item> GetAll(){
 		
 		connect();
