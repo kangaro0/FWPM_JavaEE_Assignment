@@ -31,6 +31,9 @@ public class ItemsDAO {
 				items.add( current );
 			}
 			
+			result.close();
+			stmt.close();
+			
 		} catch( SQLException sqle ){
 			sqle.printStackTrace();
 		}
@@ -64,6 +67,9 @@ public class ItemsDAO {
 			stmt.setInt( 6, item.getCategoryId() );
 			stmt.setInt( 7, item.getId() );
 			
+			stmt.execute();
+			stmt.close();
+			
 		} catch( SQLException sqle ){
 			sqle.printStackTrace();
 		}
@@ -71,6 +77,29 @@ public class ItemsDAO {
 		disconnect();
 	}
 	
+	public void CreateItem( Item item ){
+		
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Item(title, manufacturer, prize, image, description, category) VALUES(?,?,?,?,?,?)" );
+			stmt.setString( 1, item.getTitle() );
+			stmt.setInt( 2, item.getManufacturerId() );
+			stmt.setFloat( 3, item.getPrize() );
+			stmt.setInt( 4, item.getImageId() );
+			stmt.setInt( 5, item.getDescriptionId() );
+			stmt.setInt( 6, item.getCategoryId() );
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		disconnect();
+	}
 	
 	private void connect(){
 		if( _dbConnection.IsConnected() )
