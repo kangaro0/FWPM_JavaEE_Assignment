@@ -12,9 +12,12 @@ import configuration.DBConfig;
 public class DBConnection {
 	
 	private Connection _connection;
+	private String _url, _user, _pw;
 	
 	public DBConnection( ){
-		
+		_url = DBConfig.URL;
+		_user = DBConfig.User;
+		_pw = DBConfig.Password;
 	}
 	
 	public boolean IsConnected(){
@@ -35,7 +38,7 @@ public class DBConnection {
 		try {
 			
 			Class.forName( "com.mysql.cj.jdbc.Driver" );
-			_connection = DriverManager.getConnection( DBConfig.URL, DBConfig.User, DBConfig.Password );
+			_connection = DriverManager.getConnection( _url, _user, _pw );
 			
 		} catch( ClassNotFoundException cnfe ){
 			cnfe.printStackTrace();
