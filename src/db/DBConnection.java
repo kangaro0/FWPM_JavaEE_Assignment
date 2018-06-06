@@ -6,9 +6,6 @@ import java.sql.SQLException;
 
 import configuration.DBConfig;
 
-/*
- * Singleton Class for DB-Connection
- */
 public class DBConnection {
 	
 	private Connection _connection;

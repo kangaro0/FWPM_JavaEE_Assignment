@@ -8,11 +8,9 @@ public interface DAOInterface<T> {
 	
 	public T GetById(int id);
 	
-	public void Update(T model);
-	
 	public void Create(T model);
 	
-	public void Delete(T model);
-
+	public void Update(T model);
 	
+	public void Delete(T model);
 }
