@@ -91,7 +91,7 @@ public class DescriptionDAO extends BasicDAO implements DAOInterface<Description
 			stmt.setString( 3, model.getSize() );
 			stmt.setString( 4, model.getDimensions() );
 			stmt.setString( 5, model.getCpu() );
-			stmt.setString( 6, model.getId() );
+			stmt.setInt( 6, model.getId() );
 			
 			stmt.execute();
 			stmt.close();
