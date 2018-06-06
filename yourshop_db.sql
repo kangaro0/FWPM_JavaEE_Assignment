@@ -16,6 +16,24 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`yourshop_db` /*!40100 DEFAULT CHARACTER
 
 USE `yourshop_db`;
 
+/*Table structure for table `cart` */
+
+DROP TABLE IF EXISTS `cart`;
+
+CREATE TABLE `cart` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `itemid` int(11) NOT NULL,
+  `userid` int(11) NOT NULL,
+  `quantity` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `itemid` (`itemid`),
+  KEY `userid` (`userid`),
+  CONSTRAINT `cart_ibfk_1` FOREIGN KEY (`itemid`) REFERENCES `item` (`id`),
+  CONSTRAINT `cart_ibfk_2` FOREIGN KEY (`userid`) REFERENCES `usr` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+/*Data for the table `cart` */
+
 /*Table structure for table `category` */
 
 DROP TABLE IF EXISTS `category`;
@@ -25,9 +43,13 @@ CREATE TABLE `category` (
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `category` */
+
+insert  into `category`(`id`,`title`) values 
+(1,'Phone'),
+(2,'Tablet');
 
 /*Table structure for table `description` */
 
@@ -38,12 +60,15 @@ CREATE TABLE `description` (
   `os` varchar(255) DEFAULT NULL,
   `color` varchar(255) DEFAULT NULL,
   `size` varchar(255) DEFAULT NULL,
-  `dim` varchar(255) DEFAULT NULL,
+  `dimensions` varchar(255) DEFAULT NULL,
   `cpu` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `description` */
+
+insert  into `description`(`id`,`os`,`color`,`size`,`dimensions`,`cpu`) values 
+(1,'8.0 Oreo','gold','5.8','147.7x68.7x8.5','Qualcomm');
 
 /*Table structure for table `image` */
 
@@ -78,9 +103,12 @@ CREATE TABLE `item` (
   CONSTRAINT `item_ibfk_2` FOREIGN KEY (`description`) REFERENCES `description` (`id`),
   CONSTRAINT `item_ibfk_3` FOREIGN KEY (`manufacturer`) REFERENCES `manufacturer` (`id`),
   CONSTRAINT `item_ibfk_4` FOREIGN KEY (`category`) REFERENCES `category` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `item` */
+
+insert  into `item`(`id`,`title`,`price`,`image`,`description`,`category`,`manufacturer`) values 
+(1,'Galaxy S9',849,NULL,1,1,1);
 
 /*Table structure for table `manufacturer` */
 
@@ -91,9 +119,12 @@ CREATE TABLE `manufacturer` (
   `title` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `manufacturer` */
+
+insert  into `manufacturer`(`id`,`title`) values 
+(1,'Samsung');
 
 /*Table structure for table `usr` */
 
@@ -107,9 +138,10 @@ CREATE TABLE `usr` (
   `address` varchar(255) NOT NULL,
   `city` varchar(255) NOT NULL,
   `postcode` int(11) NOT NULL,
+  `pw` varchar(255) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `username` (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `usr` */
 
