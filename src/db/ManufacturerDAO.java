@@ -26,7 +26,7 @@ public class ManufacturerDAO implements DAOInterface<Manufacturer>{
 		
 		try {
 		
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Category" );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Manufacturer" );
 			ResultSet result = stmt.executeQuery();
 			
 			while( result.next() ){

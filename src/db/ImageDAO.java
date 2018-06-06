@@ -81,7 +81,7 @@ public class ImageDAO implements DAOInterface<Image> {
 		
 		try {
 			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO image(dat) VALUES(?)" );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Image(dat) VALUES(?)" );
 			stmt.setBlob(1, model.getData());
 			
 			stmt.execute();
