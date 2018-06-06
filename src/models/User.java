@@ -2,9 +2,9 @@ package models;
 
 public class User {
 	private int _id, _postCode;
-	private String _userName, _firstName, _lastName, _address, _city;
+	private String _userName, _firstName, _lastName, _address, _city, _password;
 	
-	public User( int id, String userName, String firstName, String lastName, String address, String city, int postCode ){
+	public User( int id, String userName, String firstName, String lastName, String address, String city, int postCode, String password ){
 		_id = id;
 		_userName = userName;
 		_firstName = firstName;
@@ -12,6 +12,7 @@ public class User {
 		_address = address;
 		_city = city;
 		_postCode = postCode;
+		_password = password;
 	}
 
 	public int getId() {
@@ -68,6 +69,14 @@ public class User {
 
 	public void setCity(String _city) {
 		this._city = _city;
+	}
+	
+	public String getPassword(){
+		return _password;
+	}
+	
+	public void setPassword( String password ){
+		_password = password;
 	}
 	
 	
