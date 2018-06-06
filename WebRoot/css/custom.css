@@ -19,8 +19,16 @@
     padding-left: 25%;
 }
 
+.login-form h2 {
+    margin-bottom: 25px;
+}
+
 .login-form input {
     margin-top: 5px;
+}
+
+.login-form input:last-of-type {
+    margin-top: 25px;
 }
 
 .footer {
