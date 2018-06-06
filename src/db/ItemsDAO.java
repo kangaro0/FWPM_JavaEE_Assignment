@@ -77,7 +77,32 @@ public class ItemsDAO {
 		return items;
 	}
 	
-	public void UpdateItem( Item item ){
+	public void Create( Item item ){
+		
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Item(title, manufacturer, prize, image, description, category) VALUES(?,?,?,?,?,?)" );
+			stmt.setString( 1, item.getTitle() );
+			stmt.setInt( 2, item.getManufacturerId() );
+			stmt.setFloat( 3, item.getPrize() );
+			stmt.setInt( 4, item.getImageId() );
+			stmt.setInt( 5, item.getDescriptionId() );
+			stmt.setInt( 6, item.getCategoryId() );
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		initialize();
+		disconnect();
+	}
+	
+	public void Update( Item item ){
 		
 		connect();
 		
@@ -104,32 +129,7 @@ public class ItemsDAO {
 		disconnect();
 	}
 	
-	public void CreateItem( Item item ){
-		
-		connect();
-		
-		try {
-			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Item(title, manufacturer, prize, image, description, category) VALUES(?,?,?,?,?,?)" );
-			stmt.setString( 1, item.getTitle() );
-			stmt.setInt( 2, item.getManufacturerId() );
-			stmt.setFloat( 3, item.getPrize() );
-			stmt.setInt( 4, item.getImageId() );
-			stmt.setInt( 5, item.getDescriptionId() );
-			stmt.setInt( 6, item.getCategoryId() );
-			
-			stmt.execute();
-			stmt.close();
-			
-		} catch( SQLException sqle ){
-			sqle.printStackTrace();
-		}
-		
-		initialize();
-		disconnect();
-	}
-	
-	public void DeleteItem( Item item ){
+	public void Delete( Item item ){
 		
 		connect();
 		
