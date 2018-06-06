@@ -6,13 +6,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Item;
 
-public class ItemsDAO implements DAOInterface<Item> {
+public class ItemDAO extends BasicDAO implements DAOInterface<Item> {
 	
-	DBConnection _dbConnection;
 	ArrayList<Item> _items;
 	
-	public ItemsDAO(){
-		_dbConnection = new DBConnection();
+	public ItemDAO(){
+		super();
 	}
 	
 	/*
@@ -152,7 +151,6 @@ public class ItemsDAO implements DAOInterface<Item> {
 	/*
 	 * Helper functions for filter function
 	 */
-	
 	public static ArrayList<Item> Merge( ArrayList<Item> one, ArrayList<Item> two ){
 		ArrayList<Item> items = new ArrayList<Item>();
 		items.addAll( one );
@@ -172,18 +170,6 @@ public class ItemsDAO implements DAOInterface<Item> {
 				return true;
 		}
 		return false;
-	}
-	
-	private void connect(){
-		if( _dbConnection.IsConnected() )
-			return;
-		
-		_dbConnection.Connect();
-	}
-	
-	private void disconnect(){
-		if( _dbConnection.IsConnected() )
-			_dbConnection.Disconnect();
 	}
 	
 	private void initialize(){
