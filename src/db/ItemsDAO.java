@@ -74,6 +74,7 @@ public class ItemsDAO {
 			sqle.printStackTrace();
 		}
 		
+		initialize();
 		disconnect();
 	}
 	
@@ -98,6 +99,7 @@ public class ItemsDAO {
 			sqle.printStackTrace();
 		}
 		
+		initialize();
 		disconnect();
 	}
 	
