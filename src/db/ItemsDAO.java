@@ -6,12 +6,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Item;
 
-public class Items {
+public class ItemsDAO {
 	
 	DBConnection _dbConnection;
 	ArrayList<Item> _items;
 	
-	public Items(){
+	public ItemsDAO(){
 		_dbConnection = new DBConnection();
 	}
 	
@@ -23,7 +23,7 @@ public class Items {
 		
 		try {
 		
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM item" );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Item" );
 			ResultSet result = stmt.executeQuery();
 			
 			while( result.next() ){
@@ -54,7 +54,16 @@ public class Items {
 		
 		try {
 			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE" );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE Item SET title='?', manufacturer=?, prize=?, image=?, description=?, category=? WHERE id=?" );
+			stmt.setString( 1, item.getTitle() );
+			stmt.setInt( 1, item.getManufacturerId() );
+			stmt.setFloat( 2, item.getPrize() );
+			stmt.setInt( 3, item.getImageId() );
+			stmt.setInt( 4, item.getImageId() );
+			stmt.setInt( 5, item.getDescriptionId() );
+			stmt.setInt( 6, item.getCategoryId() );
+			stmt.setInt( 7, item.getId() );
+			
 		} catch( SQLException sqle ){
 			sqle.printStackTrace();
 		}
