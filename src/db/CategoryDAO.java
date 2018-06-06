@@ -71,13 +71,43 @@ public class CategoryDAO implements DAOInterface<Category>{
 
 	@Override
 	public void Create(Category model) {
-		// TODO Auto-generated method stub
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Category(title) VALUES(?)" );
+			stmt.setString( 1, model.getTitle() );
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		initialize();
+		disconnect();
 		
 	}
 
 	@Override
 	public void Delete(Category model) {
-		// TODO Auto-generated method stub
+		connect();
+		
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "DELETE FROM Category WHERE id=?" );
+			stmt.setInt( 1, model.getId() );
+			
+			stmt.execute();
+			stmt.close();
+			
+		} catch( SQLException sqle ){
+			sqle.printStackTrace();
+		}
+		
+		initialize();
+		disconnect();
 		
 	}
 
