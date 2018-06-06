@@ -23,7 +23,8 @@ DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `category` */
@@ -63,10 +64,11 @@ DROP TABLE IF EXISTS `item`;
 CREATE TABLE `item` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  `manufacturer` int(11) NOT NULL,
+  `price` float NOT NULL,
   `image` int(11) DEFAULT NULL,
   `description` int(11) DEFAULT NULL,
   `category` int(11) NOT NULL,
+  `manufacturer` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `image` (`image`),
   KEY `description` (`description`),
@@ -87,7 +89,8 @@ DROP TABLE IF EXISTS `manufacturer`;
 CREATE TABLE `manufacturer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `title` varchar(255) NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title` (`title`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 /*Data for the table `manufacturer` */
