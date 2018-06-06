@@ -18,13 +18,15 @@ public class UserDAO extends BasicDAO implements DAOInterface<User> {
 	public ArrayList<User> GetAll() {
 		ArrayList<User> users = new ArrayList<User>();
 		
+		connect();
+		
 		try {
 			
 			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Usr" );
 			ResultSet result = stmt.executeQuery();
 			
 			while( result.next() ){
-				User current = new User( result.getInt( 1 ), result.getString( 2 ), result.getString( 3 ), result.getString( 4 ), result.getString( 5 ), result.getString( 6 ), result.getInt( 7 ) );
+				User current = new User( result.getInt( 1 ), result.getString( 2 ), result.getString( 3 ), result.getString( 4 ), result.getString( 5 ), result.getString( 6 ), result.getInt( 7 ), result.getString( 8 ) );
 				users.add( current );
 			}
 			
@@ -34,6 +36,8 @@ public class UserDAO extends BasicDAO implements DAOInterface<User> {
 		} catch( SQLException sqle ){
 			sqle.printStackTrace();
 		}
+		
+		disconnect();
 		
 		return users;
 	}

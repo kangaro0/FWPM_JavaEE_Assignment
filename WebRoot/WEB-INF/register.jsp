@@ -69,26 +69,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								Password:<br />
 								<input type='password' name='password'>
 								<br />
-								<br />
 								First Name:<br />
 								<input type='password' name='password'>
-								<br />
 								<br />
 								Last Name:<br />
 								<input type='password' name='password'>
 								<br />
-								<br />
 								Address:<br />
 								<input type='password' name='password'>
-								<br />
 								<br />
 								City:<br />
 								<input type='password' name='password'>
 								<br />
-								<br />
 								Postcode:<br />
 								<input type='password' name='password'>
-								<br />
 								<br />
 								<input type='submit' value='Register'>
 							</form>
