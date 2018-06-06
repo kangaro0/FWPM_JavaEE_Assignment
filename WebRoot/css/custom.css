@@ -31,6 +31,24 @@
     margin-top: 25px;
 }
 
+.register-form {
+	width: 50%;
+	/*padding-top: 10%;
+	padding-left: 25%;*/
+}
+
+.register-form h2 {
+	margin-bottom: 25px;
+}
+
+.register-form input{
+	margin-top: 5px;
+}
+
+.register-form input:last-of-type {
+	margin-top: 25px;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
