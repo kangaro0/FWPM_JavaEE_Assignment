@@ -25,10 +25,12 @@
 
 .login-form input {
     margin-top: 5px;
+    width: 250px;
 }
 
 .login-form input:last-of-type {
     margin-top: 25px;
+    width: 100px;
 }
 
 .register-form {
@@ -39,10 +41,12 @@
 
 .register-form input {
     margin-top: 5px;
+    width: 250px;
 }
 
-.login-form input:last-of-type {
+.register-form input:last-of-type {
     margin-top: 25px;
+    width: 100px !important;
 }
 
 .footer {
