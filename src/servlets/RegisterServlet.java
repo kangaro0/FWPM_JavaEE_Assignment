@@ -28,13 +28,6 @@ public class RegisterServlet extends HttpServlet {
         super();
         
         _userDAO = new UserDAO();
-        
-        // register password encryption class
-        try {
-        	Class.forName( "org.jasypt.util.password.StrongPasswordEncryptor" );
-        } catch( ClassNotFoundException cnfe ){
-        	cnfe.printStackTrace();
-        }
     }
 
 	/**
@@ -57,23 +50,22 @@ public class RegisterServlet extends HttpServlet {
 		String lastName = request.getParameter( "lastname" );
 		String address = request.getParameter( "address" );
 		String city = request.getParameter( "city" );
-		String postCode = request.getParameter( "postCode" );
+		String postCode = request.getParameter( "postcode" );
 		String password = request.getParameter( "password" );
 		
-		// encrypt password
-		StrongPasswordEncryptor passwordEncryptor = new StrongPasswordEncryptor();
-		String encrypted = passwordEncryptor.encryptPassword( password );
+		// validate
+		
 		
 		// check if user exists already
 		User existing = _userDAO.GetByUserName( username );
 		if( existing == null ){
 			// if not -> create User
-			User newUser = new User( 0, username, firstName, lastName, address, city, Integer.parseInt( postCode ), encrypted );
+			User newUser = new User( 0, username, firstName, lastName, address, city, Integer.parseInt( postCode ), password );
 			_userDAO.Create( newUser );
 			
 			// Send to login page
 			response.sendRedirect( request.getContextPath() + "/Login" );
-			
+			return;
 		} else {
 			session.setAttribute( "Error" , "User already exists." );
 		}

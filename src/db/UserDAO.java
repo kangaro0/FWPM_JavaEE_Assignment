@@ -67,13 +67,14 @@ public class UserDAO extends BasicDAO implements DAOInterface<User> {
 		
 		try {
 			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Usr(username,firstname,lastname,address,city,postcode) VALUES(?,?,?,?,?,?)" );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "INSERT INTO Usr(username,firstname,lastname,address,city,postcode,pw) VALUES(?,?,?,?,?,?,?)" );
 			stmt.setString( 1, model.getUserName() );
 			stmt.setString( 2, model.getFirstName() );
 			stmt.setString( 3, model.getLastName() );
 			stmt.setString( 4, model.getAddress() );
 			stmt.setString( 5,  model.getCity() );
 			stmt.setInt( 6, model.getPostCode() );
+			stmt.setString( 7, model.getPassword() );
 			
 			stmt.execute();
 			stmt.close();
@@ -93,14 +94,15 @@ public class UserDAO extends BasicDAO implements DAOInterface<User> {
 		
 		try {
 			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE Usr SET username='?', firstname='?', lastname='?', address='?', city='?', postCode=? WHERE id=?" );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "UPDATE Usr SET username='?', firstname='?', lastname='?', address='?', city='?', postCode=?, pw=? WHERE id=?" );
 			stmt.setString( 1, model.getUserName() );
 			stmt.setString( 2, model.getFirstName() );
 			stmt.setString( 3, model.getLastName() );
 			stmt.setString( 4, model.getAddress() );
 			stmt.setString( 5,  model.getCity() );
 			stmt.setInt( 6, model.getPostCode() );
-			stmt.setInt( 7, model.getId() );
+			stmt.setString( 7, model.getPassword() );
+			stmt.setInt( 8, model.getId() );
 			
 			stmt.execute();
 			stmt.close();
