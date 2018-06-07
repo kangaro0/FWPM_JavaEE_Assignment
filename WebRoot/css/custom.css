@@ -49,6 +49,10 @@
     width: 100px !important;
 }
 
+.filter form {
+    width: 100%;
+}
+
 .footer {
     position: absolute;
     bottom: 0;

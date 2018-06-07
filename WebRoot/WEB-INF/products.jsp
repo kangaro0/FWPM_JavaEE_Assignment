@@ -9,7 +9,7 @@
 		<html>
 
 		<head>
-			
+
 			<title>Our Shop</title>
 			<meta http-equiv="pragma" content="no-cache">
 			<meta http-equiv="cache-control" content="no-cache">
@@ -57,20 +57,27 @@
 
 			<!-- Products -->
 			<div class='container-fluid'>
-				<div class='row'>
-					<div class='col'>
-						<form method="GET" action='/FWPM_JavaEE_Assignment/Products'>
-							<p>Manufacturer: </p>
+				<div class='row filter'>
+					<form method="GET" action='/FWPM_JavaEE_Assignment/Products'>
+						<div class='col-sm'>
+							Manufacturer:
 							<select name='manufacturer'>
+								<option value='0'></option>
 								<option value='1'>Samsung</option>
 							</select>
-							<p>Category: </p>
+						</div>
+						<div class='col-sm'>
+							Category:
 							<select name='category'>
+								<option value='0'></option>
 								<option value='1'>Phone</option>
 								<option value='2'>Tablet</option>
 							</select>
-						</form>
-					</div>
+						</div>
+						<div class='col-sm'>
+							<input type='submit' value='Filter'>
+						</div>
+					</form>
 				</div>
 			</div>
 

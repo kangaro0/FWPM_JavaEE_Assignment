@@ -12,6 +12,8 @@ public class ItemDAO extends BasicDAO implements DAOInterface<Item> {
 	
 	public ItemDAO(){
 		super();
+		
+		_items = new ArrayList<Item>();
 	}
 	
 	/*
