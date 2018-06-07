@@ -6,36 +6,37 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import models.Category;
 
-public class CategoryDAO implements DAOInterface<Category>{
+public class CategoryDAO extends BasicDAO implements DAOInterface<Category>{
 	
-	DBConnection _dbConnection;
 	ArrayList<Category> _categories;
 	
 	public CategoryDAO() {
-		_dbConnection = new DBConnection();
+		super();
+		
+		_categories = new ArrayList<Category>();
 	}
 	
 	public ArrayList<Category> GetAll(){
 		
-	connect();
-		
-	ArrayList<Category> categories = new ArrayList<Category>();
-		
-	try {
-		
-		PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Category" );
-		ResultSet result = stmt.executeQuery();
+		connect();
 			
-		while( result.next() ){
-			Category current = new Category(result.getInt(1), result.getString(2));
-			_categories.add( current );
+		ArrayList<Category> categories = new ArrayList<Category>();
+			
+		try {
+			
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Category" );
+			ResultSet result = stmt.executeQuery();
+				
+			while( result.next() ){
+				Category current = new Category(result.getInt(1), result.getString(2));
+				_categories.add( current );
+			}
+				
+		} catch( SQLException sqle ){
+				sqle.printStackTrace();
 		}
 			
-	} catch( SQLException sqle ){
-			sqle.printStackTrace();
-	}
-		
-	disconnect();
+		disconnect();
 		
 		return categories;
 	}
@@ -109,19 +110,6 @@ public class CategoryDAO implements DAOInterface<Category>{
 		initialize();
 		disconnect();
 		
-	}
-
-	
-	private void connect(){
-		if( _dbConnection.IsConnected() )
-			return;
-		
-		_dbConnection.Connect();
-	}
-	
-	private void disconnect(){
-		if( _dbConnection.IsConnected() )
-			_dbConnection.Disconnect();
 	}
 	
 	private void initialize(){

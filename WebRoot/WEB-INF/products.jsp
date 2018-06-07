@@ -1,14 +1,15 @@
-<%@ page language="java" import="java.util.*,models.Item" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*,models.Item,models.Category,models.Manufacturer" pageEncoding="ISO-8859-1"%>
 	<%
-		ArrayList<Item> items = page.getAttribute( "items" );
+		ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute( "categories" );
+		ArrayList<Manufacturer> manufacturers = (ArrayList<Manufacturer>) request.getAttribute( "manufacturers" );
+		ArrayList<Item> items = (ArrayList<Item>) request.getAttribute( "items" );
 	%>
 
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 		<html>
 
 		<head>
-			<base href="<%=basePath%>">
-
+			
 			<title>Our Shop</title>
 			<meta http-equiv="pragma" content="no-cache">
 			<meta http-equiv="cache-control" content="no-cache">
@@ -57,37 +58,19 @@
 			<!-- Products -->
 			<div class='container-fluid'>
 				<div class='row'>
-					<div class='col'></div>
 					<div class='col'>
-						<div class='register-form'>
-							<form method='POST' action='/FWPM_JavaEE_Assignment/Register'>
-								<h2>Register</h2>
-								Username:<br />	
-								<input type='text' name='username'>
-								<br />
-								Password:<br />
-								<input type='password' name='password'>
-								<br />
-								First Name:<br />
-								<input type='text' name='password'>
-								<br />
-								Last Name:<br />
-								<input type='text' name='password'>
-								<br />
-								Address:<br />
-								<input type='text' name='password'>
-								<br />
-								City:<br />
-								<input type='text' name='password'>
-								<br />
-								Postcode:<br />
-								<input type='text' name='password'>
-								<br />
-								<input type='submit' value='Register'>
-							</form>
-						</div>
+						<form method="GET" action='/FWPM_JavaEE_Assignment/Products'>
+							<p>Manufacturer: </p>
+							<select name='manufacturer'>
+								<option value='1'>Samsung</option>
+							</select>
+							<p>Category: </p>
+							<select name='category'>
+								<option value='1'>Phone</option>
+								<option value='2'>Tablet</option>
+							</select>
+						</form>
 					</div>
-					<div class='col'></div>
 				</div>
 			</div>
 
