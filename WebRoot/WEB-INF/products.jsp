@@ -36,7 +36,7 @@
 								<span class="sr-only">(current)</span>
 							</a>
 						</li>
-						<li class="nav-item">
+						<li class="nav-item active">
 							<a class="nav-link" href="/FWPM_JavaEE_Assignment/Products">Products</a>
 						</li>
 						<!--
@@ -57,16 +57,22 @@
 
 			<!-- Products -->
 			<div class='container-fluid'>
-				<div class='row filter'>
-					<form method="GET" action='/FWPM_JavaEE_Assignment/Products'>
-						<div class='col-sm'>
+				<h2>Products</h2>
+
+				<form method="GET" action='/FWPM_JavaEE_Assignment/Products'>
+					<div class='row filter'>
+						<div class='col-sm-2'>
+							Name:
+							<input type='text' value='' name='search'/>
+						</div>
+						<div class='col-sm-2'>
 							Manufacturer:
 							<select name='manufacturer'>
 								<option value='0'></option>
 								<option value='1'>Samsung</option>
 							</select>
 						</div>
-						<div class='col-sm'>
+						<div class='col-sm-2'>
 							Category:
 							<select name='category'>
 								<option value='0'></option>
@@ -74,11 +80,12 @@
 								<option value='2'>Tablet</option>
 							</select>
 						</div>
-						<div class='col-sm'>
-							<input type='submit' value='Filter'>
+						<div class='col-sm-2'>
+							<input class='submit' type='submit' value='Filter'>
 						</div>
-					</form>
-				</div>
+					</div>
+				</form>
+
 			</div>
 
 			<footer class="footer">

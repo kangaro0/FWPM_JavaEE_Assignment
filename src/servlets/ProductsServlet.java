@@ -53,6 +53,7 @@ public class ProductsServlet extends HttpServlet {
 		// apply filter
 		String categoryString = request.getParameter( "category" );
 		String manufacturerString = request.getParameter( "manufacturer" );
+		String searchString = request.getParameter( "search" );
 		
 		// validate
 		int categoryId;
@@ -80,6 +81,9 @@ public class ProductsServlet extends HttpServlet {
 		} else {
 			items = ItemDAO.Merge( _itemDAO.GetByCategoryId( categoryId ), _itemDAO.GetByManufacturerId( manufacturerId ) );
 		}
+		
+		if( searchString != null )
+			ItemDAO.FilterByTitle( items, searchString );
 		
 		request.setAttribute( "items", items );
 		request.getRequestDispatcher( "/WEB-INF/products.jsp" ).forward( request, response );
