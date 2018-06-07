@@ -176,12 +176,16 @@ public class ItemDAO extends BasicDAO implements DAOInterface<Item> {
 		return items;
 	}
 	
-	public static ArrayList<Item> FilterByTitle( ArrayList<Item> items, String search ){
-		for( Item i : items ){
-			if( !i.getTitle().toLowerCase().contains( search.toLowerCase() ) )
+	public static void FilterByTitle( ArrayList<Item> items, String search ){
+		
+		for( int i = 0 ; i < items.size() ; i++ ){
+			
+			Item item = items.get( i );
+			if( !item.getTitle().toLowerCase().contains( search.toLowerCase() ) ){
 				items.remove( i );
+				i--;
+			}
 		}
-		return items;
 	}
 	
 	public static boolean Has( ArrayList<Item> items, Item item ){

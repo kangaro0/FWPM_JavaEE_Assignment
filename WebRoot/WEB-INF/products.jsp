@@ -67,7 +67,7 @@
 							<div class='col-sm-2'>
 								Manufacturer:
 								<select name='manufacturer'>
-									<option value="0"></option>
+									<option value="-1"></option>
 									<c:forEach items="${manufacturers}" var="current">
 										<option value="${current.getId()}">${current.getTitle()}</option>
 									</c:forEach>
@@ -76,7 +76,7 @@
 							<div class='col-sm-2'>
 								Category:
 								<select name='category'>
-									<option value='0'></option>
+									<option value='-1'></option>
 									<c:forEach items="${categories}" var="current">
 										<option value="${current.getId()}">${current.getTitle()}</option>
 									</c:forEach>
@@ -99,11 +99,26 @@
 										<div class='row'>
 											<h3>${current.getTitle()}</h3>
 										</div>
-										<div class='row'>Manufacturer: </div>
-										<div class='row'>Processor: </div>
-										<div class='row'>Operating System:</div>
-										<div class='row'>Screen-Size: </div>
-										<div class='row'>Dimensions: </div>
+										<div class='row'>
+											<div class='col-md-6'>Manufacturer:</div>
+											<div class='col-md-6'>${current.getManufacturer().getTitle()}</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>Processor:</div>
+											<div class='col-md-6'>${current.getDescription().getCpu()}</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>OS:</div>
+											<div class='col-md-6'>${current.getDescription().getOs()}</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>Screen-Size:</div>
+											<div class='col-md-6'>${current.getDescription().getSize()}</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>Dimensions:</div>
+											<div class='col-md-6'>${current.getDescription().getDimensions()}</div>
+										</div>
 										<div class='row'>
 											<form method="GET" action='/FWPM_JavaEE_Assignment/ShoppingCart?id=${current.getId()}'>
 												<input type='submit' value='Add to shopping cart'>

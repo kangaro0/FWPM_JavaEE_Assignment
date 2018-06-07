@@ -94,6 +94,10 @@
     padding: 25px 10px 0 25px;
 }
 
+.product-item .col-sm-5 .row {
+    font-size: 10pt;
+}
+
 .product-item img {
     width: 100%;
 }

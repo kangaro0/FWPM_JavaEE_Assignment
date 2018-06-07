@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.CategoryDAO;
+import db.DescriptionDAO;
 import db.ItemDAO;
 import db.ManufacturerDAO;
 import models.Category;
@@ -25,6 +26,7 @@ public class ProductsServlet extends HttpServlet {
 	private ItemDAO _itemDAO;
 	private CategoryDAO _categoryDAO;
 	private ManufacturerDAO _manufacturerDAO;
+	private DescriptionDAO _descriptionDAO;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,6 +37,7 @@ public class ProductsServlet extends HttpServlet {
         _itemDAO = new ItemDAO();
         _categoryDAO = new CategoryDAO();
         _manufacturerDAO = new ManufacturerDAO();
+        _descriptionDAO = new DescriptionDAO();
     }
 
 	/**
@@ -72,7 +75,7 @@ public class ProductsServlet extends HttpServlet {
 		
 		// get data
 		ArrayList<Item> items;
-		if( categoryId == -1 && manufacturerId == -1 ){
+		if( ( categoryId == -1 && manufacturerId == -1 ) ){
 			items = _itemDAO.GetAll();
 		} else if( categoryId == -1 ){
 			items = _itemDAO.GetByManufacturerId( manufacturerId );
@@ -80,6 +83,12 @@ public class ProductsServlet extends HttpServlet {
 			items = _itemDAO.GetByCategoryId( categoryId );
 		} else {
 			items = ItemDAO.Merge( _itemDAO.GetByCategoryId( categoryId ), _itemDAO.GetByManufacturerId( manufacturerId ) );
+		}
+		
+		// catch additional data
+		for( Item i : items ){
+			i.setManufacturer( _manufacturerDAO.GetById( i.getManufacturerId() ) );
+			i.setDescription( _descriptionDAO.GetById( i.getDescriptionId() ) );
 		}
 		
 		if( searchString != null )
