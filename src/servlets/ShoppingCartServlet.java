@@ -54,7 +54,7 @@ public class ShoppingCartServlet extends HttpServlet {
 		ArrayList<CartItem> cart = cartDAO.GetByUserId(userId);
 		ArrayList<Item> items = itemDAO.GetByUserCart(cart);
 		
-		//set Item fields
+		//set Description, Manufacturer in Item
 		for(Item i : items){
 			Description desc = descDAO.GetById(i.getDescriptionId());
 			Manufacturer man = manDAO.GetById(i.getManufacturerId());

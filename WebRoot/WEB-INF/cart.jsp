@@ -57,19 +57,61 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 					</ul>
 				</div>
 			</nav>
-    Your Shopping Cart:<br>
-    
+    <!--
      <c:forEach items = "${items}" var = "current">
-         Product: <c:out value = "${current.getTitle()}"/><p>
-         Manufacturer: <c:out value = "${current.getManufacturer().getTitle()}"/><p>
+         Product: <c:out value = "${current.getTitle()}"/><br>
+         Manufacturer: <c:out value = "${current.getManufacturer().getTitle()}"/><br>
          Price: <c:out value = "${current.getPrize()}"/><p>
-         Color: <c:out value = "${current.getDescription().getColor()}"/><p>
-         Product: <c:out value = "${current.getTitle()}"/><p>
-         Product: <c:out value = "${current.getTitle()}"/><p>
+         Description:<p>
+         OS: <c:out value = "${current.getDescription().getOs()}"/><br>
+         Screen Size: <c:out value = "${current.getDescription().getSize()}"/><br>
+         Dimensions: <c:out value = "${current.getDescription().getDimensions()}"/><br>
+         CPU: <c:out value = "${current.getDescription().getCpu()}"/><p>
          
      </c:forEach>
+       -->
+     <div class='container-fluid'>
+     	<div class='products-list'>
+						<c:forEach items="${items}" var="current">
+							<div class='product-item'>
+								<div class='row'>
+									<div class='col-sm-3'>
+										<img src="<c:url value="${basePath}/Image?id=${current.getImageId()}"/>" />
+									</div>
+									<div class='col-sm-5'>
+										<div class='row'>
+											<h3>${current.getTitle()}</h3>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>Manufacturer:</div>
+											<div class='col-md-6'>${current.getManufacturer().getTitle()}</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>Processor:</div>
+											<div class='col-md-6'>${current.getDescription().getCpu()}</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>OS:</div>
+											<div class='col-md-6'>${current.getDescription().getOs()}</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>Screen-Size:</div>
+											<div class='col-md-6'>${current.getDescription().getSize()}</div>
+										</div>
+										<div class='row'>
+											<div class='col-md-6'>Dimensions:</div>
+											<div class='col-md-6'>${current.getDescription().getDimensions()}</div>
+										</div>
+										
+									</div>
+								</div>
+							</div>
+						</c:forEach>
+					</div>
+		</div>
      
      <footer class="footer">
+     
 				<div class="container">
 					<span class="text-muted">The Your Shop Company, Sanderheinrichsleitenweg 20, 97074 Wuerzburg</span>
 				</div>
