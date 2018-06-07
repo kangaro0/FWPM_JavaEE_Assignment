@@ -8,13 +8,13 @@ import java.util.ArrayList;
 import models.Image;
 
 
-public class ImageDAO implements DAOInterface<Image> {
+public class ImageDAO extends BasicDAO implements DAOInterface<Image> {
 	
-	DBConnection _dbConnection;
 	ArrayList<Image> _images;
 	
 	public ImageDAO() {
-		_dbConnection = new DBConnection();
+		super();
+		initialize();
 	}
 
 	@Override
@@ -41,7 +41,6 @@ public class ImageDAO implements DAOInterface<Image> {
 		}
 		
 		disconnect();
-		
 		return images;
 	}
 
@@ -70,9 +69,9 @@ public class ImageDAO implements DAOInterface<Image> {
 		} catch( SQLException sqle ){
 			sqle.printStackTrace();
 		}
+		
 		initialize();
 		disconnect();
-		
 	}
 
 	@Override
@@ -93,7 +92,6 @@ public class ImageDAO implements DAOInterface<Image> {
 		
 		initialize();
 		disconnect();
-		
 	}
 
 	@Override
@@ -114,20 +112,6 @@ public class ImageDAO implements DAOInterface<Image> {
 		
 		initialize();
 		disconnect();
-
-		
-	}
-	
-	private void connect(){
-		if( _dbConnection.IsConnected() )
-			return;
-		
-		_dbConnection.Connect();
-	}
-	
-	private void disconnect(){
-		if( _dbConnection.IsConnected() )
-			_dbConnection.Disconnect();
 	}
 	
 	private void initialize(){

@@ -12,8 +12,7 @@ public class CategoryDAO extends BasicDAO implements DAOInterface<Category>{
 	
 	public CategoryDAO() {
 		super();
-		
-		_categories = new ArrayList<Category>();
+		initialize();
 	}
 	
 	public ArrayList<Category> GetAll(){
@@ -24,12 +23,12 @@ public class CategoryDAO extends BasicDAO implements DAOInterface<Category>{
 			
 		try {
 			
-			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM Category" );
+			PreparedStatement stmt = _dbConnection.GetConnection().prepareStatement( "SELECT * FROM category" );
 			ResultSet result = stmt.executeQuery();
 				
 			while( result.next() ){
 				Category current = new Category(result.getInt(1), result.getString(2));
-				_categories.add( current );
+				categories.add( current );
 			}
 				
 		} catch( SQLException sqle ){
