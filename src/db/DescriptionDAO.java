@@ -12,6 +12,7 @@ public class DescriptionDAO extends BasicDAO implements DAOInterface<Description
 	private ArrayList<Description> _descriptions;
 	
 	public DescriptionDAO(){
+		super();
 		initialize();
 	}
 	

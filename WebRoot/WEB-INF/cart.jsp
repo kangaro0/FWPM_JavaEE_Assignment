@@ -57,8 +57,17 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 					</ul>
 				</div>
 			</nav>
-    This is my JSP page. <br>
-     <c:out value = "${items.get(0)}"/>
+    Your Shopping Cart:<br>
+    
+     <c:forEach items = "${items}" var = "current">
+         Product: <c:out value = "${current.getTitle()}"/><p>
+         Manufacturer: <c:out value = "${current.getManufacturer().getTitle()}"/><p>
+         Price: <c:out value = "${current.getPrize()}"/><p>
+         Color: <c:out value = "${current.getDescription().getColor()}"/><p>
+         Product: <c:out value = "${current.getTitle()}"/><p>
+         Product: <c:out value = "${current.getTitle()}"/><p>
+         
+     </c:forEach>
      
      <footer class="footer">
 				<div class="container">

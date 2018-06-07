@@ -6,6 +6,10 @@ public class Item {
 	private String _title;
 	private float _prize;
 	
+	private Manufacturer manufacturer;
+	private Description description;
+	
+	
 	public Item( int id, String title, float prize, int imageId, int descriptionId, int categoryId, int manufacturerId ){
 		_id = id;
 		_title = title;
@@ -70,5 +74,21 @@ public class Item {
 
 	public void setPrize(float _prize) {
 		this._prize = _prize;
+	}
+
+	public Manufacturer getManufacturer() {
+		return manufacturer;
+	}
+
+	public void setManufacturer(Manufacturer manufacturer) {
+		this.manufacturer = manufacturer;
+	}
+
+	public Description getDescription() {
+		return description;
+	}
+
+	public void setDescription(Description description) {
+		this.description = description;
 	}
 }

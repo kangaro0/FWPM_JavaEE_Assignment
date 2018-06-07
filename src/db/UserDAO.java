@@ -11,6 +11,7 @@ public class UserDAO extends BasicDAO implements DAOInterface<User> {
 	private ArrayList<User> _users;
 	
 	public UserDAO(){
+		super();
 		initialize();
 	}
 	

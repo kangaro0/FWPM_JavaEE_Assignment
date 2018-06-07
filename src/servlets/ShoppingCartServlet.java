@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.CartDAO;
+import db.DescriptionDAO;
 import db.ItemDAO;
+import db.ManufacturerDAO;
 import models.CartItem;
+import models.Description;
 import models.Item;
+import models.Manufacturer;
 
 /**
  * Servlet implementation class ShoppingCartServlet
@@ -22,13 +26,21 @@ import models.Item;
 public class ShoppingCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
+	private static CartDAO cartDAO;
+	private static ItemDAO itemDAO;
+	private static DescriptionDAO descDAO;
+	private static ManufacturerDAO manDAO;
+	
     
     /**
      * @see HttpServlet#HttpServlet()
      */
     public ShoppingCartServlet() {
         super();
-        // TODO Auto-generated constructor stub
+        cartDAO = new CartDAO();
+		itemDAO = new ItemDAO();
+		descDAO = new DescriptionDAO();
+		manDAO = new ManufacturerDAO();
     }
 
 	/**
@@ -37,11 +49,21 @@ public class ShoppingCartServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//TODO get userId from Session
 		int userId = 2;
-		CartDAO cartDAO = new CartDAO();
-		ItemDAO itemDAO = new ItemDAO();
+		
+		//get all Item Objects in the Cart
 		ArrayList<CartItem> cart = cartDAO.GetByUserId(userId);
 		ArrayList<Item> items = itemDAO.GetByUserCart(cart);
+		
+		//set Item fields
+		for(Item i : items){
+			Description desc = descDAO.GetById(i.getDescriptionId());
+			Manufacturer man = manDAO.GetById(i.getManufacturerId());
+			i.setDescription(desc);
+			i.setManufacturer(man);
+		}
 		request.setAttribute("items", items);
+
+		
 		request.getRequestDispatcher( "/WEB-INF/cart.jsp" ).forward( request, response );
 	}
 

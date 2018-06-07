@@ -12,6 +12,7 @@ public class CartDAO extends BasicDAO implements DAOInterface<CartItem> {
 	private ArrayList<CartItem> _cartItems;
 	
 	public CartDAO(){
+		super();
 		initialize();
 	}
 	

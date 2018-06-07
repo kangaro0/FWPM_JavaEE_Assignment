@@ -14,14 +14,13 @@ public class ManufacturerDAO extends BasicDAO implements DAOInterface<Manufactur
 	
 	public ManufacturerDAO() {
 		super();
-		
-		_manufacturers = new ArrayList<Manufacturer>();
+		initialize();
 	}
 	
 	public ArrayList<Manufacturer> GetAll(){
 		
 		// if we already pulled from db
-		if( _manufacturers.size() != 0 )
+		if( _manufacturers != null && _manufacturers.size() != 0 )
 			return _manufacturers;
 		
 		connect();
@@ -35,7 +34,7 @@ public class ManufacturerDAO extends BasicDAO implements DAOInterface<Manufactur
 			
 			while( result.next() ){
 				Manufacturer current = new Manufacturer(result.getInt(1), result.getString(2));
-				_manufacturers.add( current );
+				manufacturers.add( current );
 			}
 			
 		} catch( SQLException sqle ){
