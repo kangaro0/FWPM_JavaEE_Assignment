@@ -4,6 +4,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import models.CartItem;
 import models.Item;
 
 public class ItemDAO extends BasicDAO implements DAOInterface<Item> {
@@ -12,6 +14,7 @@ public class ItemDAO extends BasicDAO implements DAOInterface<Item> {
 	
 	public ItemDAO(){
 		super();
+		initialize();
 	}
 	
 	/*
@@ -73,6 +76,16 @@ public class ItemDAO extends BasicDAO implements DAOInterface<Item> {
 		}
 		
 		return items;
+	}
+	
+	public ArrayList<Item> GetByUserCart(ArrayList<CartItem> cart){
+		ArrayList<Item> items = new ArrayList<Item>();
+		
+		for(CartItem cartItem : cart){
+			items.add(GetById(cartItem.getItemId()));
+		}
+		return items;
+		
 	}
 	
 	public void Create( Item item ){

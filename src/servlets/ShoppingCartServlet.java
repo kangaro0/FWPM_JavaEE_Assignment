@@ -11,7 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import db.CartDAO;
+import db.ItemDAO;
 import models.CartItem;
+import models.Item;
 
 /**
  * Servlet implementation class ShoppingCartServlet
@@ -33,9 +35,13 @@ public class ShoppingCartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int userId = Integer.getInteger(request.getParameter("userId"));
+		//TODO get userId from Session
+		int userId = 2;
 		CartDAO cartDAO = new CartDAO();
-		ArrayList<CartItem> items = cartDAO.GetByUserId(userId);
+		ItemDAO itemDAO = new ItemDAO();
+		ArrayList<CartItem> cart = cartDAO.GetByUserId(userId);
+		ArrayList<Item> items = itemDAO.GetByUserCart(cart);
+		request.setAttribute("items", items);
 		request.getRequestDispatcher( "/WEB-INF/cart.jsp" ).forward( request, response );
 	}
 
