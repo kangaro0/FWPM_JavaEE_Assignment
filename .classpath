@@ -21,5 +21,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Classes/mysql-connector-java-8.0.11.jar"/>
 	<classpathentry kind="lib" path="C:/Classes/jasypt-1.9.2.jar"/>
+	<classpathentry kind="lib" path="C:/Classes/icu4j-3.4.4.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

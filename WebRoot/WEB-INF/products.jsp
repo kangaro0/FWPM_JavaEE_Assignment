@@ -1,8 +1,7 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*,models.Item" pageEncoding="ISO-8859-1"%>
 	<%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
-%>
+		ArrayList<Item> items = page.getAttribute( "items" );
+	%>
 
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 		<html>
@@ -55,7 +54,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 			</nav>
 
-			<!-- Login -->
+			<!-- Products -->
 			<div class='container-fluid'>
 				<div class='row'>
 					<div class='col'></div>

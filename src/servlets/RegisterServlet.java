@@ -28,6 +28,13 @@ public class RegisterServlet extends HttpServlet {
         super();
         
         _userDAO = new UserDAO();
+        
+        // register password encryption class
+        try {
+        	Class.forName( "org.jasypt.util.password.StrongPasswordEncryptor" );
+        } catch( ClassNotFoundException cnfe ){
+        	cnfe.printStackTrace();
+        }
     }
 
 	/**

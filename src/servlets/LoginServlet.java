@@ -28,6 +28,13 @@ public class LoginServlet extends HttpServlet {
         super();
         
         _userDAO = new UserDAO();
+        
+        // register password encryption class
+        try {
+        	Class.forName( "org.jasypt.util.password.StrongPasswordEncryptor" );
+        } catch( ClassNotFoundException cnfe ){
+        	cnfe.printStackTrace();
+        }
     }
 
 	/**
@@ -55,6 +62,7 @@ public class LoginServlet extends HttpServlet {
 		// check if user exists && password is correct
 		if( current != null && current.getPassword().equals( encrypted ) ){
 			session.setAttribute( "loggedIn", true );
+			session.setAttribute( "userId", current.getId() );
 			
 			// Check if user wanted to navigate to protected page before login
 			Object destinationUri = session.getAttribute( "destinationUri" );

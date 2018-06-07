@@ -22,7 +22,13 @@ public class AuthenticationFilter implements Filter {
      * Default constructor. 
      */
     public AuthenticationFilter() {
-        // TODO Auto-generated constructor stub
+        
+    	// register password encryption class
+        try {
+        	Class.forName( "org.jasypt.util.password.StrongPasswordEncryptor" );
+        } catch( ClassNotFoundException cnfe ){
+        	cnfe.printStackTrace();
+        }
     }
 
 	/**
