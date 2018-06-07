@@ -19,8 +19,8 @@ import models.Item;
 /**
  * Servlet implementation class ProductsServlet
  */
-@WebServlet("/Products")
-public class ProductsServlet extends HttpServlet {
+@WebServlet("/Product")
+public class ProductServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ItemDAO _itemDAO;
 	private CategoryDAO _categoryDAO;
@@ -29,7 +29,7 @@ public class ProductsServlet extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ProductsServlet() {
+    public ProductServlet() {
         super();
        
         _itemDAO = new ItemDAO();
@@ -42,50 +42,26 @@ public class ProductsServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// get possible filter
-		ArrayList<Category> categories = _categoryDAO.GetAll();
-		ArrayList<Manufacturer> manufacturers = _manufacturerDAO.GetAll();
+		String itemIdString = request.getParameter( "id" );
+		int itemId;
 		
-		// push to session
-		request.setAttribute( "categories", categories );
-		request.setAttribute( "manufacturers", manufacturers );
-		
-		// apply filter
-		String categoryString = request.getParameter( "category" );
-		String manufacturerString = request.getParameter( "manufacturer" );
-		String searchString = request.getParameter( "search" );
-		
-		// validate
-		int categoryId;
 		try {
-			categoryId = Integer.parseInt( categoryString );
+			itemId = Integer.parseInt( itemIdString );
 		} catch( NumberFormatException nfe ){
-			categoryId = -1;
+			itemId = -1;
 		}
 		
-		int manufacturerId;
-		try {
-			manufacturerId = Integer.parseInt( manufacturerString );
-		} catch( NumberFormatException nfe ){
-			manufacturerId = -1;
-		}
+		// if no item
+		if( itemId == -1 )
+			response.sendRedirect( request.getContextPath() + "/Products" );
 		
-		// get data
-		ArrayList<Item> items;
-		if( categoryId == -1 && manufacturerId == -1 ){
-			items = _itemDAO.GetAll();
-		} else if( categoryId == -1 ){
-			items = _itemDAO.GetByManufacturerId( manufacturerId );
-		} else if( manufacturerId == -1 ){
-			items = _itemDAO.GetByCategoryId( categoryId );
-		} else {
-			items = ItemDAO.Merge( _itemDAO.GetByCategoryId( categoryId ), _itemDAO.GetByManufacturerId( manufacturerId ) );
-		}
+		Item item = _itemDAO.GetById( itemId );
 		
-		if( searchString != null )
-			ItemDAO.FilterByTitle( items, searchString );
+		// if id is invalid
+		if( item == null )
+			response.sendRedirect( request.getContextPath() + "/Products" );
 		
-		request.setAttribute( "items", items );
+		request.setAttribute( "item", item );
 		request.getRequestDispatcher( "/WEB-INF/products.jsp" ).forward( request, response );
 	}
 

@@ -8,17 +8,21 @@ import java.util.ArrayList;
 import models.Manufacturer;
 
 
-public class ManufacturerDAO implements DAOInterface<Manufacturer>{
+public class ManufacturerDAO extends BasicDAO implements DAOInterface<Manufacturer>{
 	
-	
-	DBConnection _dbConnection;
 	ArrayList<Manufacturer> _manufacturers;
 	
 	public ManufacturerDAO() {
-		_dbConnection = new DBConnection();
+		super();
+		
+		_manufacturers = new ArrayList<Manufacturer>();
 	}
 	
 	public ArrayList<Manufacturer> GetAll(){
+		
+		// if we already pulled from db
+		if( _manufacturers.size() != 0 )
+			return _manufacturers;
 		
 		connect();
 		
@@ -112,19 +116,6 @@ public class ManufacturerDAO implements DAOInterface<Manufacturer>{
 		initialize();
 		disconnect();
 		
-	}
-	
-	
-	private void connect(){
-		if( _dbConnection.IsConnected() )
-			return;
-		
-		_dbConnection.Connect();
-	}
-	
-	private void disconnect(){
-		if( _dbConnection.IsConnected() )
-			_dbConnection.Disconnect();
 	}
 	
 	private void initialize(){

@@ -1,8 +1,6 @@
 <%@ page language="java" import="java.util.*,models.Item,models.Category,models.Manufacturer" pageEncoding="ISO-8859-1"%>
 	<%
-		ArrayList<Category> categories = (ArrayList<Category>) request.getAttribute( "categories" );
-		ArrayList<Manufacturer> manufacturers = (ArrayList<Manufacturer>) request.getAttribute( "manufacturers" );
-		ArrayList<Item> items = (ArrayList<Item>) request.getAttribute( "items" );
+		
 	%>
 
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

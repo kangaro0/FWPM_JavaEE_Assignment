@@ -3,6 +3,10 @@
     height: 90%;
 }
 
+.container-fluid h2 {
+    margin: 50px 0 0 50px;
+}
+
 .big-image {
     background-image: url( '../img/background_main.jpg' );
     background-position: center bottom;
@@ -47,6 +51,28 @@
 .register-form input:last-of-type {
     margin-top: 25px;
     width: 100px !important;
+}
+
+.filter {
+    margin: 25px 0 0 50px;
+}
+
+.filter form {
+    width: 100%;
+}
+
+.filter select {
+    width: 100%;
+}
+
+.filter input {
+    height: 25px;
+    width: 100%;
+}
+
+.filter .submit {
+    height: 50px;
+    width: 100px;
 }
 
 .footer {
