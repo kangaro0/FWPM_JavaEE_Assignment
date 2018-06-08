@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import db.CartDAO;
 import db.DescriptionDAO;
@@ -47,11 +48,10 @@ public class ShoppingCartServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//TODO get userId from Session
-		int userId = 2;
+		HttpSession session = request.getSession();	
 		
 		//get all Item Objects in the Cart
-		ArrayList<CartItem> cart = cartDAO.GetByUserId(userId);
+		ArrayList<CartItem> cart = cartDAO.GetByUserId((int) session.getAttribute("userid"));
 		ArrayList<Item> items = itemDAO.GetByUserCart(cart);
 		
 		//set Description, Manufacturer in Item

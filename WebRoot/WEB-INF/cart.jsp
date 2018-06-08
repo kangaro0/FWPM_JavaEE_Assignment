@@ -70,33 +70,6 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
          
      </c:forEach>
        -->
-     <div class='container-fluid'>
-     	<div class='products-list'>
-						<c:forEach items="${items}" var="current">
-							<div class='product-item'>
-								<div class='row'>
-									<div class='col-sm-3'>
-										<img src="<c:url value="${basePath}/Image?id=${current.getImageId()}"/>" />
-									</div>
-									<div class='col-sm-5'>
-										<div class='row'>
-											<h3>${current.getTitle()}</h3>
-										</div>
-										<div class='row'>
-											<div class='col-md-6'>Manufacturer:</div>
-												<div class='col-md-6'>${current.getManufacturer().getTitle()}</div>
-										</div>
-										<div class='row'>
-											<div class='col-md-6'>Price:</div>
-											<div class='col-md-6'>${current.getPrize()}</div>
-										</div>
-										
-									</div>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
-		</div>
      
      <footer class="footer">
      
