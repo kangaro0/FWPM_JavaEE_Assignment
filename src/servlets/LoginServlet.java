@@ -50,9 +50,6 @@ public class LoginServlet extends HttpServlet {
 		// check if user exists && password is correct
 		if( current != null && current.getPassword().equals( password ) ){
 			
-			System.out.println( current.getPassword() );
-			System.out.println( password );
-			
 			session.setAttribute( "loggedIn", true );
 			session.setAttribute( "userid", current.getId() );
 			session.setAttribute( "username" , current.getUserName() );

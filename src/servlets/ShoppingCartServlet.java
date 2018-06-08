@@ -54,12 +54,16 @@ public class ShoppingCartServlet extends HttpServlet {
 		ArrayList<CartItem> cart = cartDAO.GetByUserId((int) session.getAttribute("userid"));
 		
 		// fill items
+		float grandTotal = 0;
 		for( CartItem c : cart ){
 			Item current = itemDAO.GetById( c.getItemId() );
 			current.setManufacturer( manDAO.GetById( current.getManufacturerId() ) );
 			c.setItem( current );
+			
+			grandTotal += ( c.getQuantity() * current.getPrize() );
 		}
 		
+		request.setAttribute( "grandtotal", grandTotal );
 		request.setAttribute("items", cart );
 		request.getRequestDispatcher( "/WEB-INF/cart.jsp" ).forward( request, response );
 	}
@@ -68,8 +72,49 @@ public class ShoppingCartServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
-		doGet(request, response);
+		String origUri = (String) request.getAttribute("javax.servlet.forward.request_uri");
+		System.out.println( origUri );
+		
+		String itemIdString = request.getParameter( "itemid" );
+		String quantityString = request.getParameter( "quantity" );
+		int userId = (int) session.getAttribute( "userid" );
+		
+		int itemId;
+		try {
+			itemId = Integer.parseInt( itemIdString );
+		} catch( NumberFormatException nfe ){
+			itemId = -1;
+		}
+		
+		int quantity;
+		try {
+			quantity = Integer.parseInt( quantityString );
+		} catch( NumberFormatException nfe ){
+			quantity = -1;
+		}
+		
+		if( itemId == -1 && quantityString == null )
+			// nothing to do
+			response.sendRedirect( origUri );
+		else if( itemId > 0 && quantity == -1 ){
+			// add to cart
+			ArrayList<CartItem> items = cartDAO.GetAll();
+			Item toAdd = itemDAO.GetById( itemId );
+			cartDAO.Add( toAdd, userId);
+		} else if( itemId > 0 && quantity == 0 ){
+			// remove
+			CartItem c = cartDAO.GetByUserIdAndItemId( userId, itemId );
+			cartDAO.Delete( c );
+		} else {
+			// update quantity
+			CartItem c = cartDAO.GetByUserIdAndItemId( userId, itemId );
+			c.setQuantity( quantity );
+			cartDAO.Update( c );
+		}
+		
+		doGet( request, response );
 	}
 
 }

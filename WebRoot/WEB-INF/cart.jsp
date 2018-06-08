@@ -72,16 +72,19 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 						<div class='cart-list'>
 							<c:forEach items="${items}" var="current">
 								<div class='row'>
-									<div class='col-md-1'>${current.getItem().getManufacturer().getTitle()}</div>
+									<div class='col-md-2'>${current.getItem().getManufacturer().getTitle()}</div>
 									<div class='col-md-2'>${current.getItem().getTitle()}</div>
 									<div class='col-md-1'></div>
-									<div class='col-md-2'><form method='post' action='/FWPM_JavaEE_Assignment/ShoppingCart'>Quantity: <input type='text' value='${current.getQuantity()}' name='quantity'></form></div>
-									<div class='col-md-1'>Prize: ${current.getItem().getPrize()}</div>
+									<div class='col-md-3'><form method='post' action='/FWPM_JavaEE_Assignment/ShoppingCart'>Quantity: <input class='input_form' type='text' value='${current.getQuantity()}' name='quantity'><input type='text' name='itemid' value='${current.getItemId()}' hidden></form></div>
+									<div class='col-md-2'>Prize: ${current.getItem().getPrize()}</div>
 									<c:set var='total' value='${current.getQuantity() * current.getItem().getPrize()}' />
-									<div class='col-md-1'>Total: ${total}</div>
-									<div class='col-md-4'></div>
+									<div class='col-md-2'>Total: ${total}</div>
 								</div>
 							</c:forEach>
+							<div class='row'>
+								<div class='col-md-10'></div>
+								<div class='col-md-2' style='padding-bottom:10px;'>Grand: ${grandtotal}</div>
+							</div>
 						</div>
 					</div>
 
@@ -99,7 +102,13 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 					 crossorigin="anonymous"></script>
 					<!-- Script for quantity form submit -->
 					<script>
-					
+						$( '.input_form' ).each( ( index, element ) => {
+							$(element).keypress( ( event ) => {
+								if( event.which == 13 ){
+									$(element).parent().submit();
+								}
+							});
+						});
 					</script>
 				</body>
 		</html>

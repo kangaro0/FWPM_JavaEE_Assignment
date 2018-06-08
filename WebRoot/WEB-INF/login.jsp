@@ -80,6 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 								<br />
 								<input type='submit' value='Login'>
 							</form>
+							<p>You can register <a href='/FWPM_JavaEE_Assignment/Register'>here</a></p>
 						</div>
 					</div>
 					<div class='col'></div>

@@ -139,7 +139,7 @@
 										</div>
 										<div class='row'>
 											<form method="POST" action='/FWPM_JavaEE_Assignment/ShoppingCart'>
-												<input type='text' value='${current.getId()}' hidden>
+												<input type='text' name='itemid' value='${current.getId()}' hidden>
 												<input type='submit' value='Add to shopping cart'>
 											</form>
 										</div>

@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import models.CartItem;
+import models.Item;
 
 public class CartDAO extends BasicDAO implements DAOInterface<CartItem> {
 
@@ -58,9 +59,10 @@ public class CartDAO extends BasicDAO implements DAOInterface<CartItem> {
 	
 	public ArrayList<CartItem> GetByItemId( int itemId ){
 		ArrayList<CartItem> items = new ArrayList<CartItem>();
-		for( CartItem c : _cartItems )
+		for( CartItem c : _cartItems ){
 			if( c.getItemId() == itemId )
 				items.add( c );
+		}
 		return items;
 	}
 	
@@ -70,6 +72,14 @@ public class CartDAO extends BasicDAO implements DAOInterface<CartItem> {
 			if( c.getUserId() == userId )
 				items.add( c );
 		return items;
+	}
+	
+	public CartItem GetByUserIdAndItemId( int userId, int itemId ){
+		for( CartItem c : _cartItems ){
+			if( c.getUserId() == userId && c.getItemId() == itemId )
+				return c;
+		}
+		return null;
 	}
 
 	@Override
@@ -118,7 +128,6 @@ public class CartDAO extends BasicDAO implements DAOInterface<CartItem> {
 		
 		initialize();
 		disconnect();
-		
 	}
 
 	@Override
@@ -141,6 +150,34 @@ public class CartDAO extends BasicDAO implements DAOInterface<CartItem> {
 		initialize();
 		disconnect();
 		
+	}
+	
+	public void Add( Item item, int userId ){
+		CartItem cItem = GetByUserIdAndItemId( userId, item.getId() );
+		if( cItem == null ){
+			cItem = new CartItem( 0, item.getId(), userId, 1 );
+			Create( cItem );
+		} else {
+			// already in cart
+			cItem.setQuantity( cItem.getQuantity() + 1 );
+			Update( cItem );
+		}
+	}
+	
+	public static boolean Has( ArrayList<CartItem> items, CartItem item ){
+		for( CartItem c : items ){
+			if( c.getId() == item.getId() )
+				return true;
+		}
+		return false;
+	}
+	
+	public static boolean Has( ArrayList<CartItem> items, Item item ){
+		for( CartItem c : items ){
+			if( c.getItem().getId() == item.getId() )
+				return true;
+		}
+		return false;
 	}
 
 	private void initialize(){

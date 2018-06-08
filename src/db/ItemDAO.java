@@ -82,15 +82,10 @@ public class ItemDAO extends BasicDAO implements DAOInterface<Item> {
 		ArrayList<Item> items = new ArrayList<Item>();
 		
 		for(CartItem cartItem : cart){
-			Item current = GetById(cartItem.getItemId());
-			
-			//setQuantity from Cart to Item
-			current.setQuantity(cartItem.getQuantity());
-			
+			Item current = GetById( cartItem.getItemId() );
 			items.add(current);
 		}
 		return items;
-		
 	}
 	
 	public void Create( Item item ){
