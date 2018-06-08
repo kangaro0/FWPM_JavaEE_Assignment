@@ -84,23 +84,11 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 										</div>
 										<div class='row'>
 											<div class='col-md-6'>Manufacturer:</div>
-											<div class='col-md-6'>${current.getManufacturer().getTitle()}</div>
+												<div class='col-md-6'>${current.getManufacturer().getTitle()}</div>
 										</div>
 										<div class='row'>
-											<div class='col-md-6'>Processor:</div>
-											<div class='col-md-6'>${current.getDescription().getCpu()}</div>
-										</div>
-										<div class='row'>
-											<div class='col-md-6'>OS:</div>
-											<div class='col-md-6'>${current.getDescription().getOs()}</div>
-										</div>
-										<div class='row'>
-											<div class='col-md-6'>Screen-Size:</div>
-											<div class='col-md-6'>${current.getDescription().getSize()}</div>
-										</div>
-										<div class='row'>
-											<div class='col-md-6'>Dimensions:</div>
-											<div class='col-md-6'>${current.getDescription().getDimensions()}</div>
+											<div class='col-md-6'>Price:</div>
+											<div class='col-md-6'>${current.getPrize()}</div>
 										</div>
 										
 									</div>
