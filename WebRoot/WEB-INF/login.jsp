@@ -62,6 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class='col'>
 						<div class='login-form'>
 							<h2>Login</h2>
+							<div class='error'>${Error}</div>
 							<form method='POST' action='/FWPM_JavaEE_Assignment/Login'>
 								Username:<br />
 								<input type='text' name='username'>
