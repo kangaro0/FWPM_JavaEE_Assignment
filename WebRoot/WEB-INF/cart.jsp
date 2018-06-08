@@ -72,13 +72,14 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 						<div class='cart-list'>
 							<c:forEach items="${items}" var="current">
 								<div class='row'>
-									<div class='col-md-2'>${current.getItem().getManufacturer().getTitle()}</div>
+									<div class='col-md-1'>${current.getItem().getManufacturer().getTitle()}</div>
 									<div class='col-md-2'>${current.getItem().getTitle()}</div>
-									<div class='col-md-2'></div>
-									<div class='col-md-3'>Quantity: <form method='post' action='/FWPM_JavaEE_Assignment/ShoppingCart'><input type='text' value='${current.getQuantity()}' name='quantity'></form></div>
+									<div class='col-md-1'></div>
+									<div class='col-md-2'><form method='post' action='/FWPM_JavaEE_Assignment/ShoppingCart'>Quantity: <input type='text' value='${current.getQuantity()}' name='quantity'></form></div>
 									<div class='col-md-1'>Prize: ${current.getItem().getPrize()}</div>
 									<c:set var='total' value='${current.getQuantity() * current.getItem().getPrize()}' />
 									<div class='col-md-1'>Total: ${total}</div>
+									<div class='col-md-4'></div>
 								</div>
 							</c:forEach>
 						</div>

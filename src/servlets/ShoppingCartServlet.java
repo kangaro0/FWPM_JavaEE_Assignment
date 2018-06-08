@@ -56,6 +56,7 @@ public class ShoppingCartServlet extends HttpServlet {
 		// fill items
 		for( CartItem c : cart ){
 			Item current = itemDAO.GetById( c.getItemId() );
+			current.setManufacturer( manDAO.GetById( current.getManufacturerId() ) );
 			c.setItem( current );
 		}
 		

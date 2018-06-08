@@ -110,6 +110,10 @@
     color: red;
 }
 
+.cart-list {
+    margin: 25px 0 0 50px;
+}
+
 .footer {
     position: absolute;
     bottom: 0;
