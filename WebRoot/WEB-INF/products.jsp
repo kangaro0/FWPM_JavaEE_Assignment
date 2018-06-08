@@ -47,6 +47,18 @@
 					</div>
 					<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 						<ul class="navbar-nav ml-auto">
+							<li class='nav-item'>
+								<p class='nav-link'>
+									<c:choose>
+										<c:when test="${loggedIn==true}">
+											User: ${username}
+										</c:when>
+										<c:otherwise>
+											User: /
+										</c:otherwise>
+									</c:choose>
+								</p>
+							</li>
 							<li class="nav-item">
 								<a class="nav-link" href="/FWPM_JavaEE_Assignment/ShoppingCart">Shopping Cart</a>
 							</li>
@@ -58,6 +70,7 @@
 				<div class='container-fluid'>
 					<h2>Products</h2>
 
+					<!-- FILTER -->
 					<form method="GET" action='/FWPM_JavaEE_Assignment/Products'>
 						<div class='row filter'>
 							<div class='col-sm-2'>
@@ -88,6 +101,7 @@
 						</div>
 					</form>
 
+					<!-- LIST -->
 					<div class='products-list'>
 						<c:forEach items="${items}" var="current">
 							<div class='product-item'>
@@ -120,7 +134,12 @@
 											<div class='col-md-6'>${current.getDescription().getDimensions()}</div>
 										</div>
 										<div class='row'>
-											<form method="GET" action='/FWPM_JavaEE_Assignment/ShoppingCart?id=${current.getId()}'>
+											<div class='col-md-6'>Price:</div>
+											<div class='col-md-6'>${current.getPrize()}</div>
+										</div>
+										<div class='row'>
+											<form method="POST" action='/FWPM_JavaEE_Assignment/ShoppingCart'>
+												<input type='text' value='${current.getId()}' hidden>
 												<input type='submit' value='Add to shopping cart'>
 											</form>
 										</div>

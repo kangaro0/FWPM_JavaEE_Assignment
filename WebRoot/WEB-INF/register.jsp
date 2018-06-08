@@ -48,6 +48,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 					<ul class="navbar-nav ml-auto">
+						<li class='nav-item'>
+							<p class='nav-link'>
+								<c:choose>
+									<c:when test="${loggedIn==true}">
+										User: ${username}
+									</c:when>
+									<c:otherwise>
+										User: /
+									</c:otherwise>
+								</c:choose>
+							</p>
+						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="/FWPM_JavaEE_Assignment/ShoppingCart">Shopping Cart</a>
 						</li>
@@ -63,25 +75,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<div class='register-form'>
 							<form method='POST' action='/FWPM_JavaEE_Assignment/Register'>
 								<h2>Register</h2>
-								Username:<br />	
+								Username:
+								<br />
 								<input type='text' name='username'>
+								<br /> Password:
 								<br />
-								Password:<br />
 								<input type='password' name='password'>
+								<br /> First Name:
 								<br />
-								First Name:<br />
 								<input type='text' name='firstname'>
+								<br /> Last Name:
 								<br />
-								Last Name:<br />
 								<input type='text' name='lastname'>
+								<br /> Address:
 								<br />
-								Address:<br />
 								<input type='text' name='address'>
+								<br /> City:
 								<br />
-								City:<br />
 								<input type='text' name='city'>
+								<br /> Postcode:
 								<br />
-								Postcode:<br />
 								<input type='text' name='postcode'>
 								<br />
 								<input type='submit' value='Register'>

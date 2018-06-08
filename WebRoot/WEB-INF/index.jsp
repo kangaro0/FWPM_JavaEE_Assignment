@@ -48,6 +48,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div>
 				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
 					<ul class="navbar-nav ml-auto">
+						<li class='nav-item'>
+							<p class='nav-link'>
+								<c:choose>
+									<c:when test="${loggedIn==true}">
+										User: ${username}
+									</c:when>
+									<c:otherwise>
+										User: /
+									</c:otherwise>
+								</c:choose>
+							</p>
+						</li>
 						<li class="nav-item">
 							<a class="nav-link" href="/FWPM_JavaEE_Assignment/ShoppingCart">Shopping Cart</a>
 						</li>

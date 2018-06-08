@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
-	<%
+<%@ taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %>
+<%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
@@ -39,29 +40,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<li class="nav-item">
 							<a class="nav-link" href="/FWPM_JavaEE_Assignment/Products">Products</a>
 						</li>
-						<!--
-						<li class="nav-item">
-							<a class="nav-link" href="/FWPM_JavaEE_Assigment/Login">Login</a>
-						</li>
-						-->
 					</ul>
 				</div>
 				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
-					<ul class='navbar-nav ml-auto'>
+					<ul class="navbar-nav ml-auto">
 						<li class='nav-item'>
 							<p class='nav-link'>
 								<c:choose>
 									<c:when test="${loggedIn==true}">
 										User: ${username}
 									</c:when>
-									<c:when test="${loggedIn==null}">
-										Not logged in!
-									</c:when>
+									<c:otherwise>
+										User: /
+									</c:otherwise>
 								</c:choose>
 							</p>
 						</li>
-					</ul>
-					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
 							<a class="nav-link" href="/FWPM_JavaEE_Assignment/ShoppingCart">Shopping Cart</a>
 						</li>
