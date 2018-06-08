@@ -8,8 +8,6 @@ public class Item {
 	
 	private Manufacturer manufacturer;
 	private Description description;
-	private int quantity;
-	
 	
 	public Item( int id, String title, float prize, int imageId, int descriptionId, int categoryId, int manufacturerId ){
 		_id = id;
@@ -91,13 +89,5 @@ public class Item {
 
 	public void setDescription(Description description) {
 		this.description = description;
-	}
-
-	public int getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(int quantity) {
-		this.quantity = quantity;
 	}
 }

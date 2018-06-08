@@ -5,7 +5,6 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 %>
-
 				<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 				<html>
 
@@ -68,49 +67,24 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 							</ul>
 						</div>
 					</nav>
-					<!--
-     <c:forEach items = "${items}" var = "current">
-         Product: <c:out value = "${current.getTitle()}"/><br>
-         Manufacturer: <c:out value = "${current.getManufacturer().getTitle()}"/><br>
-         Price: <c:out value = "${current.getPrize()}"/><p>
-         Description:<p>
-         OS: <c:out value = "${current.getDescription().getOs()}"/><br>
-         Screen Size: <c:out value = "${current.getDescription().getSize()}"/><br>
-         Dimensions: <c:out value = "${current.getDescription().getDimensions()}"/><br>
-         CPU: <c:out value = "${current.getDescription().getCpu()}"/><p>
-         
-     </c:forEach>
-       -->
 					<div class='container-fluid'>
-						<div class='products-list'>
+						<h2>Shopping Cart</h2>
+						<div class='cart-list'>
 							<c:forEach items="${items}" var="current">
-								<div class='product-item'>
-									<div class='row'>
-										<div class='col-sm-3'>
-											<img src="<c:url value="${basePath}/Image?id=${current.getImageId()}"/>" />
-										</div>
-										<div class='col-sm-5'>
-											<div class='row'>
-												<h3>${current.getTitle()}</h3>
-											</div>
-											<div class='row'>
-												<div class='col-md-6'>Manufacturer:</div>
-												<div class='col-md-6'>${current.getManufacturer().getTitle()}</div>
-											</div>
-											<div class='row'>
-												<div class='col-md-6'>Price:</div>
-												<div class='col-md-6'>${current.getPrize()}</div>
-											</div>
-
-										</div>
-									</div>
+								<div class='row'>
+									<div class='col-md-2'>${current.getItem().getManufacturer().getTitle()}</div>
+									<div class='col-md-2'>${current.getItem().getTitle()}</div>
+									<div class='col-md-2'></div>
+									<div class='col-md-3'>Quantity: <form method='post' action='/FWPM_JavaEE_Assignment/ShoppingCart'><input type='text' value='${current.getQuantity()}' name='quantity'></form></div>
+									<div class='col-md-1'>Prize: ${current.getItem().getPrize()}</div>
+									<c:set var='total' value='${current.getQuantity() * current.getItem().getPrize()}' />
+									<div class='col-md-1'>Total: ${total}</div>
 								</div>
 							</c:forEach>
 						</div>
 					</div>
 
 					<footer class="footer">
-
 						<div class="container">
 							<span class="text-muted">The Your Shop Company, Sanderheinrichsleitenweg 20, 97074 Wuerzburg</span>
 						</div>
@@ -122,6 +96,9 @@ ArrayList<Item> items = (ArrayList<Item>) request.getAttribute("items");
 					 crossorigin="anonymous"></script>
 					<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 					 crossorigin="anonymous"></script>
+					<!-- Script for quantity form submit -->
+					<script>
+					
+					</script>
 				</body>
-
-				</html>
+		</html>

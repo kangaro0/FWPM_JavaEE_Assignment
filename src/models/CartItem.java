@@ -2,6 +2,7 @@ package models;
 
 public class CartItem {
 	private int _id, _itemId, _userId, _quantity;
+	private Item _item;
 	
 	public CartItem( int id, int itemId, int userId, int quantity ){
 		_id = id;
@@ -40,5 +41,13 @@ public class CartItem {
 	
 	public void setQuantity( int quantity ){
 		_quantity = quantity;
+	}
+	
+	public Item getItem(){
+		return _item;
+	}
+	
+	public void setItem( Item item ){
+		_item = item;
 	}
 }

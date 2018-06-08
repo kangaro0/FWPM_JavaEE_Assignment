@@ -52,18 +52,14 @@ public class ShoppingCartServlet extends HttpServlet {
 		
 		//get all Item Objects in the Cart
 		ArrayList<CartItem> cart = cartDAO.GetByUserId((int) session.getAttribute("userid"));
-		ArrayList<Item> items = itemDAO.GetByUserCart(cart);
 		
-		//set Description, Manufacturer in Item
-		for(Item i : items){
-			Description desc = descDAO.GetById(i.getDescriptionId());
-			Manufacturer man = manDAO.GetById(i.getManufacturerId());
-			i.setDescription(desc);
-			i.setManufacturer(man);
+		// fill items
+		for( CartItem c : cart ){
+			Item current = itemDAO.GetById( c.getItemId() );
+			c.setItem( current );
 		}
-		request.setAttribute("items", items);
-
 		
+		request.setAttribute("items", cart );
 		request.getRequestDispatcher( "/WEB-INF/cart.jsp" ).forward( request, response );
 	}
 
