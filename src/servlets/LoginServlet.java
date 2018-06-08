@@ -49,8 +49,13 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		// check if user exists && password is correct
 		if( current != null && current.getPassword().equals( password ) ){
+			
+			System.out.println( current.getPassword() );
+			System.out.println( password );
+			
 			session.setAttribute( "loggedIn", true );
-			session.setAttribute( "userId", current.getId() );
+			session.setAttribute( "userid", current.getId() );
+			session.setAttribute( "username" , current.getUserName() );
 			
 			// Check if user wanted to navigate to protected page before login
 			Object destinationUri = session.getAttribute( "destinationUri" );
@@ -65,7 +70,7 @@ public class LoginServlet extends HttpServlet {
 				return;
 			}
 		} else {
-			session.setAttribute( "Error", "Login failed!" );
+			session.setAttribute( "error_message", "Login failed!" );
 		}
 		
 		doGet(request, response);

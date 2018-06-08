@@ -47,6 +47,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					</ul>
 				</div>
 				<div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+					<ul class='navbar-nav ml-auto'>
+						<li class='nav-item'>
+							<p class='nav-link'>
+								<c:choose>
+									<c:when test="${loggedIn==true}">
+										User: ${username}
+									</c:when>
+									<c:when test="${loggedIn==null}">
+										Not logged in!
+									</c:when>
+								</c:choose>
+							</p>
+						</li>
+					</ul>
 					<ul class="navbar-nav ml-auto">
 						<li class="nav-item">
 							<a class="nav-link" href="/FWPM_JavaEE_Assignment/ShoppingCart">Shopping Cart</a>
@@ -62,7 +76,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 					<div class='col'>
 						<div class='login-form'>
 							<h2>Login</h2>
-							<div class='error'>${Error}</div>
+							<p class='error'>${error_message}</p>
 							<form method='POST' action='/FWPM_JavaEE_Assignment/Login'>
 								Username:<br />
 								<input type='text' name='username'>

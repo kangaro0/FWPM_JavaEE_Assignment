@@ -54,7 +54,7 @@ public class UserDAO extends BasicDAO implements DAOInterface<User> {
 	
 	public User GetByUserName( String userName ){
 		for( User u : _users ){
-			if( u.getUserName() == userName )
+			if( u.getUserName().equals( userName ) )
 				return u;
 		}
 		return null;

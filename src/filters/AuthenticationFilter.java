@@ -15,7 +15,7 @@ import javax.servlet.http.HttpSession;
 /**
  * Servlet Filter implementation class AuthenticationFilter
  */
-@WebFilter("/AuthenticationFilter")
+@WebFilter(filterName="AuthenticationFilter", urlPatterns = { "/ShoppingCart"})
 public class AuthenticationFilter implements Filter {
 
     /**
@@ -49,7 +49,7 @@ public class AuthenticationFilter implements Filter {
 		String loginUri = req.getContextPath() + "/Login";
 		String destinationUri = req.getRequestURI();
 		
-		boolean loggedIn = session != null && ( boolean ) session.getAttribute( "loggedIn" ) == true;
+		boolean loggedIn = session != null && session.getAttribute( "loggedIn" ) != null;
 		boolean loginRequest = req.getRequestURI().equals( loginUri );
 		
 		if( loggedIn || loginRequest )
